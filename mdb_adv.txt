@@ -1,0 +1,651 @@
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+web15   0.000GB
+> use web15
+switched to db web15
+> show collections
+movies_table
+student
+students
+users
+> db.movies_table.find({}).count()
+500
+> db.movies_table.find({movie_name:{$eq:{"Bleeder"}}},{movie_name:1, production_year:1, _id:0})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:48
+> db.movies_table.find({movie_name:{$eq:"Bleeder"}},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Bleeder", "production_year" : 1990 }
+> db.movies_table.find({movie_name:{$ne:"Bleeder"}},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999 }
+{ "movie_name" : "Carrie", "production_year" : 2013 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013 }
+{ "movie_name" : "Bomber", "production_year" : 1996 }
+{ "movie_name" : "Alamo, The", "production_year" : 2000 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "In Secret", "production_year" : 2020 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+Type "it" for more
+> db.movies_table.find({budget:{$gt:10000}},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011 }
+{ "movie_name" : "Bleeder", "production_year" : 1990 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999 }
+{ "movie_name" : "Carrie", "production_year" : 2013 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013 }
+{ "movie_name" : "Alamo, The", "production_year" : 2000 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "In Secret", "production_year" : 2020 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+{ "movie_name" : "Reeker", "production_year" : 2010 }
+Type "it" for more
+> db.movies_table.find({$and:[{budget:{$gt:10000}},{budget:{$gte:10000}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011 }
+{ "movie_name" : "Bleeder", "production_year" : 1990 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999 }
+{ "movie_name" : "Carrie", "production_year" : 2013 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013 }
+{ "movie_name" : "Alamo, The", "production_year" : 2000 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "In Secret", "production_year" : 2020 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+{ "movie_name" : "Reeker", "production_year" : 2010 }
+Type "it" for more
+> db.movies_table.find({$and:[{budget:{$gt:10000}},{budget:{$gte:10000}}]},{movie_name:1, production_year:1, _id:0,budget:1})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011, "budget" : 18834 }
+{ "movie_name" : "Bleeder", "production_year" : 1990, "budget" : 18081 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999, "budget" : 17586 }
+{ "movie_name" : "Carrie", "production_year" : 2013, "budget" : 15500 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018, "budget" : 14161 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015, "budget" : 13315 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013, "budget" : 12580 }
+{ "movie_name" : "Alamo, The", "production_year" : 2000, "budget" : 17110 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016, "budget" : 12660 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014, "budget" : 16000 }
+{ "movie_name" : "Double Take", "production_year" : 2008, "budget" : 13467 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016, "budget" : 10288 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005, "budget" : 10718 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001, "budget" : 13188 }
+{ "movie_name" : "In Secret", "production_year" : 2020, "budget" : 17593 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005, "budget" : 11578 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998, "budget" : 14768 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001, "budget" : 19193 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003, "budget" : 19553 }
+{ "movie_name" : "Reeker", "production_year" : 2010, "budget" : 17257 }
+Type "it" for more
+> db.movies_table.find({$and:[{budget:{$lt:10000}},{budget:{$lte:10000}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Bomber", "production_year" : 1996 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007 }
+{ "movie_name" : "State of Play", "production_year" : 2004 }
+{ "movie_name" : "Undead", "production_year" : 1995 }
+{ "movie_name" : "Brand Upon the Brain!", "production_year" : 2020 }
+{ "movie_name" : "Scourge", "production_year" : 2000 }
+{ "movie_name" : "Animal House", "production_year" : 1997 }
+{ "movie_name" : "Racket, The", "production_year" : 2020 }
+{ "movie_name" : "Employment, The (Empleo, El)", "production_year" : 1991 }
+{ "movie_name" : "Ten Little Indians (Ein Unbekannter rechnet ab) (And Then There Were None)", "production_year" : 1998 }
+{ "movie_name" : "High School Confidential!", "production_year" : 2006 }
+{ "movie_name" : "Breakheart Pass", "production_year" : 2020 }
+{ "movie_name" : "Hireling, The", "production_year" : 2016 }
+{ "movie_name" : "Karan Arjun", "production_year" : 2001 }
+{ "movie_name" : "Joy Ride 2: Dead Ahead", "production_year" : 2015 }
+{ "movie_name" : "Me Myself I", "production_year" : 2001 }
+{ "movie_name" : "24 Hours on Craigslist", "production_year" : 2003 }
+{ "movie_name" : "Muzi v nadeji", "production_year" : 2004 }
+{ "movie_name" : "Golem, The (Golem, wie er in die Welt kam, Der)", "production_year" : 2011 }
+{ "movie_name" : "Boy and the Pirates, The", "production_year" : 1998 }
+Type "it" for more
+> db.movies_table.find({$and:[{budget:{$lt:10000}},{budget:{$lte:10000}}]},{movie_name:1, production_year:1, _id:0,budget:1})
+{ "movie_name" : "Bomber", "production_year" : 1996, "budget" : 9904 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007, "budget" : 9414 }
+{ "movie_name" : "State of Play", "production_year" : 2004, "budget" : 9118 }
+{ "movie_name" : "Undead", "production_year" : 1995, "budget" : 9057 }
+{ "movie_name" : "Brand Upon the Brain!", "production_year" : 2020, "budget" : 9620 }
+{ "movie_name" : "Scourge", "production_year" : 2000, "budget" : 9390 }
+{ "movie_name" : "Animal House", "production_year" : 1997, "budget" : 9869 }
+{ "movie_name" : "Racket, The", "production_year" : 2020, "budget" : 9636 }
+{ "movie_name" : "Employment, The (Empleo, El)", "production_year" : 1991, "budget" : 9552 }
+{ "movie_name" : "Ten Little Indians (Ein Unbekannter rechnet ab) (And Then There Were None)", "production_year" : 1998, "budget" : 9530 }
+{ "movie_name" : "High School Confidential!", "production_year" : 2006, "budget" : 9320 }
+{ "movie_name" : "Breakheart Pass", "production_year" : 2020, "budget" : 9115 }
+{ "movie_name" : "Hireling, The", "production_year" : 2016, "budget" : 9662 }
+{ "movie_name" : "Karan Arjun", "production_year" : 2001, "budget" : 9293 }
+{ "movie_name" : "Joy Ride 2: Dead Ahead", "production_year" : 2015, "budget" : 9700 }
+{ "movie_name" : "Me Myself I", "production_year" : 2001, "budget" : 9243 }
+{ "movie_name" : "24 Hours on Craigslist", "production_year" : 2003, "budget" : 9227 }
+{ "movie_name" : "Muzi v nadeji", "production_year" : 2004, "budget" : 9761 }
+{ "movie_name" : "Golem, The (Golem, wie er in die Welt kam, Der)", "production_year" : 2011, "budget" : 9687 }
+{ "movie_name" : "Boy and the Pirates, The", "production_year" : 1998, "budget" : 9159 }
+Type "it" for more
+> db.movies_table.find({$and:[{production_year:{$gt:2000}},{budget:{$gt:10000}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011 }
+{ "movie_name" : "Carrie", "production_year" : 2013 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "In Secret", "production_year" : 2020 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+{ "movie_name" : "Reeker", "production_year" : 2010 }
+{ "movie_name" : "China 9, Liberty 37 (Amore, piombo e furore)", "production_year" : 2008 }
+{ "movie_name" : "October", "production_year" : 2009 }
+{ "movie_name" : "Wonderful, Horrible Life of Leni Riefenstahl, The (Macht der Bilder: Leni Riefenstahl, Die)", "production_year" : 2001 }
+{ "movie_name" : "Asterix and the Big Fight (Astérix et le coup du menhir)", "production_year" : 2004 }
+Type "it" for more
+> db.movies_table.find({$or:[{production_year:{$gt:2000}},{budget:{$gt:10000}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011 }
+{ "movie_name" : "Bleeder", "production_year" : 1990 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999 }
+{ "movie_name" : "Carrie", "production_year" : 2013 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013 }
+{ "movie_name" : "Alamo, The", "production_year" : 2000 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "In Secret", "production_year" : 2020 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+Type "it" for more
+> db.movies_table.find({$or:[{production_year:{$gt:2000}},{budget:{$gt:10000}}]},{movie_name:1, production_year:1, _id:0,budget:1})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011, "budget" : 18834 }
+{ "movie_name" : "Bleeder", "production_year" : 1990, "budget" : 18081 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999, "budget" : 17586 }
+{ "movie_name" : "Carrie", "production_year" : 2013, "budget" : 15500 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018, "budget" : 14161 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015, "budget" : 13315 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013, "budget" : 12580 }
+{ "movie_name" : "Alamo, The", "production_year" : 2000, "budget" : 17110 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016, "budget" : 12660 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014, "budget" : 16000 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007, "budget" : 9414 }
+{ "movie_name" : "Double Take", "production_year" : 2008, "budget" : 13467 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016, "budget" : 10288 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005, "budget" : 10718 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001, "budget" : 13188 }
+{ "movie_name" : "In Secret", "production_year" : 2020, "budget" : 17593 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005, "budget" : 11578 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998, "budget" : 14768 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001, "budget" : 19193 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003, "budget" : 19553 }
+Type "it" for more
+> db.movies_table.find({$nor:[{production_year:{$gt:2000}},{budget:{$gt:10000}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Bomber", "production_year" : 1996 }
+{ "movie_name" : "Undead", "production_year" : 1995 }
+{ "movie_name" : "Scourge", "production_year" : 2000 }
+{ "movie_name" : "Animal House", "production_year" : 1997 }
+{ "movie_name" : "Employment, The (Empleo, El)", "production_year" : 1991 }
+{ "movie_name" : "Ten Little Indians (Ein Unbekannter rechnet ab) (And Then There Were None)", "production_year" : 1998 }
+{ "movie_name" : "Boy and the Pirates, The", "production_year" : 1998 }
+{ "movie_name" : "New York Doll", "production_year" : 1993 }
+{ "movie_name" : "Bohemian Life, The (La vie de bohème)", "production_year" : 1992 }
+{ "movie_name" : "Night of the Comet", "production_year" : 1996 }
+{ "movie_name" : "Street Smart", "production_year" : 1990 }
+{ "movie_name" : "Bag It", "production_year" : 1996 }
+{ "movie_name" : "Protector (Protektor)", "production_year" : 1996 }
+>
+> db.movies_table.find({$or:[{production_year:{$not:{$eq:2000}}},{budget:{$lt:10000}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011 }
+{ "movie_name" : "Bleeder", "production_year" : 1990 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999 }
+{ "movie_name" : "Carrie", "production_year" : 2013 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013 }
+{ "movie_name" : "Bomber", "production_year" : 1996 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "In Secret", "production_year" : 2020 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+Type "it" for more
+> db.movies_table.find({$or:[{production_year:{$not:{$eq:2000}}},{budget:{$lt:10000}}]},{movie_name:1, production_year:1, _id:0,budget:1})
+{ "movie_name" : "Keeper of Lost Causes, The (Kvinden i buret)", "production_year" : 2011, "budget" : 18834 }
+{ "movie_name" : "Bleeder", "production_year" : 1990, "budget" : 18081 }
+{ "movie_name" : "Cheech & Chong's The Corsican Brothers", "production_year" : 1999, "budget" : 17586 }
+{ "movie_name" : "Carrie", "production_year" : 2013, "budget" : 15500 }
+{ "movie_name" : "Get Yourself a College Girl", "production_year" : 2018, "budget" : 14161 }
+{ "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)", "production_year" : 2015, "budget" : 13315 }
+{ "movie_name" : "She Monkeys", "production_year" : 2013, "budget" : 12580 }
+{ "movie_name" : "Bomber", "production_year" : 1996, "budget" : 9904 }
+{ "movie_name" : "Blast from the Past", "production_year" : 2016, "budget" : 12660 }
+{ "movie_name" : "Young in Heart, The", "production_year" : 2014, "budget" : 16000 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007, "budget" : 9414 }
+{ "movie_name" : "Double Take", "production_year" : 2008, "budget" : 13467 }
+{ "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent", "production_year" : 2016, "budget" : 10288 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005, "budget" : 10718 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001, "budget" : 13188 }
+{ "movie_name" : "In Secret", "production_year" : 2020, "budget" : 17593 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005, "budget" : 11578 }
+{ "movie_name" : "My Dear Enemy (Meotjin haru)", "production_year" : 1998, "budget" : 14768 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001, "budget" : 19193 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003, "budget" : 19553 }
+Type "it" for more
+> db.movies_table.find({$and:[{production_year:{$gte:2000}},{production_year:{$lte:2010}}]},{movie_name:1, production_year:1, _id:0})
+{ "movie_name" : "Alamo, The", "production_year" : 2000 }
+{ "movie_name" : "Poto and Cabengo", "production_year" : 2007 }
+{ "movie_name" : "Double Take", "production_year" : 2008 }
+{ "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)", "production_year" : 2005 }
+{ "movie_name" : "Code Name: The Cleaner", "production_year" : 2001 }
+{ "movie_name" : "Mulholland Drive", "production_year" : 2005 }
+{ "movie_name" : "Confessions of a Driving Instructor", "production_year" : 2001 }
+{ "movie_name" : "Innocent Sleep, The", "production_year" : 2003 }
+{ "movie_name" : "Reeker", "production_year" : 2010 }
+{ "movie_name" : "China 9, Liberty 37 (Amore, piombo e furore)", "production_year" : 2008 }
+{ "movie_name" : "Man of a Thousand Faces", "production_year" : 2000 }
+{ "movie_name" : "October", "production_year" : 2009 }
+{ "movie_name" : "Wonderful, Horrible Life of Leni Riefenstahl, The (Macht der Bilder: Leni Riefenstahl, Die)", "production_year" : 2001 }
+{ "movie_name" : "Asterix and the Big Fight (Astérix et le coup du menhir)", "production_year" : 2004 }
+{ "movie_name" : "State of Play", "production_year" : 2004 }
+{ "movie_name" : "Jack Goes Boating", "production_year" : 2006 }
+{ "movie_name" : "Ran", "production_year" : 2004 }
+{ "movie_name" : "My Beautiful Laundrette", "production_year" : 2010 }
+{ "movie_name" : "Grocer's Son, The (Fils de l'épicier, Le)", "production_year" : 2008 }
+{ "movie_name" : "Angel", "production_year" : 2002 }
+Type "it" for more
+> db.movies_table.find({}).sort(production_year:-1,movie_name:1).pretty()
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:45
+> db.movies_table.find({}).sort({production_year:-1,movie_name:1}).pretty()
+{
+        "_id" : ObjectId("622bac862352786905a9a617"),
+        "id" : 35,
+        "movie_name" : "Brand Upon the Brain!",
+        "movie_genre" : "Adventure|Fantasy|Mystery",
+        "production_year" : 2020,
+        "budget" : 9620
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a689"),
+        "id" : 149,
+        "movie_name" : "Breakheart Pass",
+        "movie_genre" : "Western",
+        "production_year" : 2020,
+        "budget" : 9115
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a731"),
+        "id" : 317,
+        "movie_name" : "Burning Bright",
+        "movie_genre" : "Drama|Horror|Thriller",
+        "production_year" : 2020,
+        "budget" : 18784
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a757"),
+        "id" : 355,
+        "movie_name" : "DEFCON: The Documentary",
+        "movie_genre" : "Documentary",
+        "production_year" : 2020,
+        "budget" : 12041
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a69b"),
+        "id" : 167,
+        "movie_name" : "Goodbye Pork Pie",
+        "movie_genre" : "Action|Adventure|Drama",
+        "production_year" : 2020,
+        "budget" : 18642
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a605"),
+        "id" : 17,
+        "movie_name" : "In Secret",
+        "movie_genre" : "Crime|Drama|Romance|Thriller",
+        "production_year" : 2020,
+        "budget" : 17593
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a7bc"),
+        "id" : 456,
+        "movie_name" : "Prinsessa (Starring Maja)",
+        "movie_genre" : "Drama",
+        "production_year" : 2020,
+        "budget" : 14528
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a63e"),
+        "id" : 74,
+        "movie_name" : "Racket, The",
+        "movie_genre" : "Crime|Film-Noir",
+        "production_year" : 2020,
+        "budget" : 9636
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a7a8"),
+        "id" : 436,
+        "movie_name" : "Selfish Giant, The",
+        "movie_genre" : "Drama",
+        "production_year" : 2020,
+        "budget" : 15616
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a711"),
+        "id" : 285,
+        "movie_name" : "September Issue, The",
+        "movie_genre" : "Documentary",
+        "production_year" : 2020,
+        "budget" : 12602
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a72a"),
+        "id" : 310,
+        "movie_name" : "Three Musketeers, The",
+        "movie_genre" : "Action|Adventure|Drama|Romance",
+        "production_year" : 2020,
+        "budget" : 16985
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6ef"),
+        "id" : 251,
+        "movie_name" : "Bounty, The",
+        "movie_genre" : "Adventure|Drama",
+        "production_year" : 2019,
+        "budget" : 19543
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6d0"),
+        "id" : 220,
+        "movie_name" : "Bye Bye Birdie",
+        "movie_genre" : "Comedy|Musical",
+        "production_year" : 2019,
+        "budget" : 17751
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a724"),
+        "id" : 304,
+        "movie_name" : "Cool as Ice",
+        "movie_genre" : "Drama",
+        "production_year" : 2019,
+        "budget" : 11564
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6a7"),
+        "id" : 179,
+        "movie_name" : "Cradle of Fear",
+        "movie_genre" : "Crime|Drama|Horror|Mystery|Thriller",
+        "production_year" : 2019,
+        "budget" : 10396
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a65d"),
+        "id" : 105,
+        "movie_name" : "Diary of a Cannibal",
+        "movie_genre" : "Crime|Horror",
+        "production_year" : 2019,
+        "budget" : 17875
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a7e3"),
+        "id" : 495,
+        "movie_name" : "Eyewitness (Janitor, The)",
+        "movie_genre" : "Thriller",
+        "production_year" : 2019,
+        "budget" : 16640
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a632"),
+        "id" : 62,
+        "movie_name" : "Flower of My Secret, The (La flor de mi secreto)",
+        "movie_genre" : "Comedy|Drama",
+        "production_year" : 2019,
+        "budget" : 15900
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6d2"),
+        "id" : 222,
+        "movie_name" : "French Cancan",
+        "movie_genre" : "Comedy|Drama|Musical|Romance",
+        "production_year" : 2019,
+        "budget" : 16843
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a651"),
+        "id" : 93,
+        "movie_name" : "Hidden Face, The (La cara oculta)",
+        "movie_genre" : "Thriller",
+        "production_year" : 2019,
+        "budget" : 18793
+}
+Type "it" for more
+>db.movies_table.find({}).sort({production_year:-1,movie_name:1}).skip(10).limit(5)pretty()
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:82
+> db.movies_table.find({}).sort({production_year:-1,movie_name:1}).skip(10).limit(5).pretty()
+{
+        "_id" : ObjectId("622bac862352786905a9a72a"),
+        "id" : 310,
+        "movie_name" : "Three Musketeers, The",
+        "movie_genre" : "Action|Adventure|Drama|Romance",
+        "production_year" : 2020,
+        "budget" : 16985
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6ef"),
+        "id" : 251,
+        "movie_name" : "Bounty, The",
+        "movie_genre" : "Adventure|Drama",
+        "production_year" : 2019,
+        "budget" : 19543
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6d0"),
+        "id" : 220,
+        "movie_name" : "Bye Bye Birdie",
+        "movie_genre" : "Comedy|Musical",
+        "production_year" : 2019,
+        "budget" : 17751
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a724"),
+        "id" : 304,
+        "movie_name" : "Cool as Ice",
+        "movie_genre" : "Drama",
+        "production_year" : 2019,
+        "budget" : 11564
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a6a7"),
+        "id" : 179,
+        "movie_name" : "Cradle of Fear",
+        "movie_genre" : "Crime|Drama|Horror|Mystery|Thriller",
+        "production_year" : 2019,
+        "budget" : 10396
+}
+> db.movies_table.updateMany({},{$unset:{movie_genre: ""}})
+{ "acknowledged" : true, "matchedCount" : 500, "modifiedCount" : 0 }
+> db.movies_table.find({}).pretty()
+{
+        "_id" : ObjectId("622bac862352786905a9a5f5"),
+        "unset" : {
+                "movie_genre" : ""
+        }
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5f6"),
+        "id" : 2,
+        "movie_name" : "Bleeder",
+        "production_year" : 1990,
+        "budget" : 18081
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5f7"),
+        "id" : 3,
+        "movie_name" : "Cheech & Chong's The Corsican Brothers",
+        "production_year" : 1999,
+        "budget" : 17586
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5f8"),
+        "id" : 4,
+        "movie_name" : "Carrie",
+        "production_year" : 2013,
+        "budget" : 15500
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5f9"),
+        "id" : 5,
+        "movie_name" : "Get Yourself a College Girl",
+        "production_year" : 2018,
+        "budget" : 14161
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5fa"),
+        "id" : 6,
+        "movie_name" : "Boy Eating the Bird's Food (To agori troei to fagito tou pouliou)",
+        "production_year" : 2015,
+        "budget" : 13315
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5fb"),
+        "id" : 7,
+        "movie_name" : "She Monkeys",
+        "production_year" : 2013,
+        "budget" : 12580
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5fc"),
+        "id" : 8,
+        "movie_name" : "Bomber",
+        "production_year" : 1996,
+        "budget" : 9904
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5fd"),
+        "id" : 9,
+        "movie_name" : "Alamo, The",
+        "production_year" : 2000,
+        "budget" : 17110
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5fe"),
+        "id" : 10,
+        "movie_name" : "Blast from the Past",
+        "production_year" : 2016,
+        "budget" : 12660
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a5ff"),
+        "id" : 11,
+        "movie_name" : "Young in Heart, The",
+        "production_year" : 2014,
+        "budget" : 16000
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a600"),
+        "id" : 12,
+        "movie_name" : "Poto and Cabengo",
+        "production_year" : 2007,
+        "budget" : 9414
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a601"),
+        "id" : 13,
+        "movie_name" : "Double Take",
+        "production_year" : 2008,
+        "budget" : 13467
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a602"),
+        "id" : 14,
+        "movie_name" : "Jimmy Rosenberg: The Father, the Son & the Talent",
+        "production_year" : 2016,
+        "budget" : 10288
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a603"),
+        "id" : 15,
+        "movie_name" : "I, Cesar (Moi César, 10 ans 1/2, 1m39)",
+        "production_year" : 2005,
+        "budget" : 10718
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a604"),
+        "id" : 16,
+        "movie_name" : "Code Name: The Cleaner",
+        "production_year" : 2001,
+        "budget" : 13188
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a605"),
+        "id" : 17,
+        "movie_name" : "In Secret",
+        "production_year" : 2020,
+        "budget" : 17593
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a606"),
+        "id" : 18,
+        "movie_name" : "Mulholland Drive",
+        "production_year" : 2005,
+        "budget" : 11578
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a607"),
+        "id" : 19,
+        "movie_name" : "My Dear Enemy (Meotjin haru)",
+        "production_year" : 1998,
+        "budget" : 14768
+}
+{
+        "_id" : ObjectId("622bac862352786905a9a608"),
+        "id" : 20,
+        "movie_name" : "Confessions of a Driving Instructor",
+        "production_year" : 2001,
+        "budget" : 19193
+}
+Type "it" for more
+>
